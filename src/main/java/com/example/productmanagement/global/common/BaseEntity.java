@@ -22,5 +22,5 @@ public class BaseEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    private Boolean isActivated;
+    private Boolean isActivated = true;
 }
