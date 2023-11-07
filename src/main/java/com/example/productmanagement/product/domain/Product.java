@@ -3,6 +3,7 @@ package com.example.productmanagement.product.domain;
 import com.example.productmanagement.global.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,13 @@ public class Product extends BaseEntity {
 
     @Column(name = "stock", nullable = false)
     private Long stock;
+
+    @Builder
+    public Product(String name, Category category, String description, Long price, Long stock) {
+        this.name = name;
+        this.category = category;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+    }
 }
