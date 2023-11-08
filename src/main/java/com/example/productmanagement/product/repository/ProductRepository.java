@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Optional<Product> findByProductIdAndIsActivated(Long productId, Boolean isActivated);
+    Optional<Product> findByIdAndIsActivated(Long id, Boolean isActivated);
 
     List<Product> findAllByCategoryAndIsActivated(Category category, Boolean isActivated);
 

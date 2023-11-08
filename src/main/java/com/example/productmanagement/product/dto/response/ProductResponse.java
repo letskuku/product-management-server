@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class ProductResponse {
 
-    private final Long productId;
+    private final Long id;
     private final String name;
     private final Category category;
     private final String description;
@@ -16,8 +16,8 @@ public class ProductResponse {
     private final Long stock;
 
     @Builder
-    public ProductResponse(Long productId, String name, Category category, String description, Long price, Long stock) {
-        this.productId = productId;
+    public ProductResponse(Long id, String name, Category category, String description, Long price, Long stock) {
+        this.id = id;
         this.name = name;
         this.category = category;
         this.description = description;
@@ -27,7 +27,7 @@ public class ProductResponse {
 
     public static ProductResponse fromEntity(Product product) {
         return ProductResponse.builder()
-                .productId(product.getProductId())
+                .id(product.getId())
                 .name(product.getName())
                 .category(product.getCategory())
                 .description(product.getDescription())
