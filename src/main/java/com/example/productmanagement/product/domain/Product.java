@@ -1,6 +1,8 @@
 package com.example.productmanagement.product.domain;
 
 import com.example.productmanagement.global.common.BaseEntity;
+import com.example.productmanagement.product.exception.ProductErrorCode;
+import com.example.productmanagement.product.exception.ProductException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -40,5 +42,16 @@ public class Product extends BaseEntity {
         this.description = description;
         this.price = price;
         this.stock = stock;
+    }
+
+    public void reduceStock(Long amount) {
+
+        if (amount <= 0) {
+            throw new ProductException(ProductErrorCode.ILLEGAL_NEGATIVE_NUMBER);
+        } else if (this.stock < amount) {
+            throw new ProductException(ProductErrorCode.ILLEGAL_STOCK_AMOUNT);
+        }
+
+        this.stock -= amount;
     }
 }
