@@ -5,6 +5,7 @@ import com.example.productmanagement.product.domain.Product;
 import com.example.productmanagement.user.domain.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,12 @@ public class Order extends BaseEntity {
 
     @Column(name = "total_price", nullable = false)
     private Long totalPrice;
+
+    @Builder
+    public Order(User user, Product product, Long quantity, Long totalPrice) {
+        this.user = user;
+        this.product = product;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
 }
