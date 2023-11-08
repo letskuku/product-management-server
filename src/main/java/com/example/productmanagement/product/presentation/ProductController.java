@@ -2,13 +2,13 @@ package com.example.productmanagement.product.presentation;
 
 import com.example.productmanagement.product.application.ProductService;
 import com.example.productmanagement.product.dto.request.CreateProductRequest;
+import com.example.productmanagement.product.dto.response.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -23,5 +23,15 @@ public class ProductController {
         productService.createProduct(createProductRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<List<ProductResponse>> getProductsByCategory(@RequestParam String category) {
+        return ResponseEntity.ok(productService.getProductsByCategory(category));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> getAllProducts() {
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 }
