@@ -54,4 +54,13 @@ public class Product extends BaseEntity {
 
         this.stock -= amount;
     }
+
+    public void increaseStock(Long amount) {
+
+        if (amount <= 0) {
+            throw new ProductException(ProductErrorCode.ILLEGAL_NEGATIVE_NUMBER);
+        }
+
+        this.stock += amount;
+    }
 }
