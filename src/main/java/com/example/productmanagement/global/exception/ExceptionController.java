@@ -1,5 +1,6 @@
 package com.example.productmanagement.global.exception;
 
+import com.example.productmanagement.order.exception.OrderException;
 import com.example.productmanagement.product.exception.ProductException;
 import com.example.productmanagement.user.exception.UserException;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,12 @@ public class ExceptionController {
 
     @ExceptionHandler(UserException.class)
     public ResponseEntity<String> catchUserException(UserException e) {
+        log.error(e.getMessage(), e);
+        return ResponseEntity.status(e.getErrorCode()).body(e.getMessage());
+    }
+
+    @ExceptionHandler(OrderException.class)
+    public ResponseEntity<String> catchOrderException(OrderException e) {
         log.error(e.getMessage(), e);
         return ResponseEntity.status(e.getErrorCode()).body(e.getMessage());
     }
