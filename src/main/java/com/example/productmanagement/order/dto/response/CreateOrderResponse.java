@@ -9,13 +9,15 @@ public class CreateOrderResponse {
 
     private final String productName;
     private final String userName;
+    private final String email;
     private final Long quantity;
     private final Long totalPrice;
 
     @Builder
-    public CreateOrderResponse(String productName, String userName, Long quantity, Long totalPrice) {
+    public CreateOrderResponse(String productName, String userName, String email, Long quantity, Long totalPrice) {
         this.productName = productName;
         this.userName = userName;
+        this.email = email;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
     }
@@ -24,6 +26,7 @@ public class CreateOrderResponse {
         return CreateOrderResponse.builder()
                 .productName(order.getProduct().getName())
                 .userName(order.getUser().getName())
+                .email(order.getUser().getEmail())
                 .quantity(order.getQuantity())
                 .totalPrice(order.getTotalPrice())
                 .build();
