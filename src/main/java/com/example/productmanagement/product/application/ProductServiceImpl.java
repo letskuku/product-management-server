@@ -1,8 +1,11 @@
 package com.example.productmanagement.product.application;
 
 import com.example.productmanagement.product.domain.Category;
+import com.example.productmanagement.product.domain.Product;
 import com.example.productmanagement.product.dto.request.CreateProductRequest;
 import com.example.productmanagement.product.dto.response.ProductResponse;
+import com.example.productmanagement.product.exception.ProductErrorCode;
+import com.example.productmanagement.product.exception.ProductException;
 import com.example.productmanagement.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,5 +48,15 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
 
         return productResponses;
+    }
+
+    @Override
+    @Transactional
+    public void deleteProduct(Long productId) {
+
+        Product product = productRepository.findByIdAndIsActivated(productId, true)
+                .orElseThrow(() -> new ProductException(ProductErrorCode.PRODUCT_NOT_FOUND, productId));
+
+        product.updateIsActivatedFalse();
     }
 }

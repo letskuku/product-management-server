@@ -12,4 +12,6 @@ public interface ProductService {
     List<ProductResponse> getProductsByCategory(String category);
 
     List<ProductResponse> getAllProducts();
+
+    void deleteProduct(Long productId);
 }
