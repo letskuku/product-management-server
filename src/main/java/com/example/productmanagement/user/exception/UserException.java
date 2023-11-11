@@ -9,7 +9,7 @@ public class UserException extends RuntimeException {
     private final HttpStatus errorCode;
 
     public UserException(UserErrorCode errorCode, String email) {
-        super(errorCode.getErrorMessage() + " + " + email);
+        super(errorCode.getErrorMessage() + " : " + email);
         this.errorCode = errorCode.getErrorCode();
     }
 }
