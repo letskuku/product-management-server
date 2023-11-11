@@ -2,6 +2,7 @@ package com.example.productmanagement.order.presentation;
 
 import com.example.productmanagement.order.application.OrderService;
 import com.example.productmanagement.order.dto.request.CreateOrderRequest;
+import com.example.productmanagement.order.dto.response.CreateOrderResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,7 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<Void> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
-
-        orderService.createOrder(createOrderRequest);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<CreateOrderResponse> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createOrder(createOrderRequest));
     }
 }

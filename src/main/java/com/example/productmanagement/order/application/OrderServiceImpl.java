@@ -1,6 +1,8 @@
 package com.example.productmanagement.order.application;
 
+import com.example.productmanagement.order.domain.Order;
 import com.example.productmanagement.order.dto.request.CreateOrderRequest;
+import com.example.productmanagement.order.dto.response.CreateOrderResponse;
 import com.example.productmanagement.order.repository.OrderRepository;
 import com.example.productmanagement.product.domain.Product;
 import com.example.productmanagement.product.exception.ProductErrorCode;
@@ -24,7 +26,8 @@ public class OrderServiceImpl implements OrderService {
     private final UserRepository userRepository;
 
     @Override
-    public void createOrder(CreateOrderRequest createOrderRequest) {
+    @Transactional
+    public CreateOrderResponse createOrder(CreateOrderRequest createOrderRequest) {
 
         User user = userRepository.findByEmailAndIsActivated(createOrderRequest.getEmail(), true)
                 .orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND, createOrderRequest.getEmail()));
@@ -36,6 +39,8 @@ public class OrderServiceImpl implements OrderService {
 
         Long totalPrice = createOrderRequest.getQuantity() * product.getPrice();
 
-        orderRepository.save(createOrderRequest.toEntity(user, product, totalPrice));
+        Order order = orderRepository.save(createOrderRequest.toEntity(user, product, totalPrice));
+
+        return CreateOrderResponse.fromEntity(order);
     }
 }

@@ -11,12 +11,13 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Table(name = "orders")
 @Entity
 public class Order extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "order_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
