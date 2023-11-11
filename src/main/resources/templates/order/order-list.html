@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <title>Product Management Application</title>
+</head>
+<body class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand">Product Management Application</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Product List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/new">SignUp</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<h1>Order List</h1>
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Ordered At</th>
+        <th scope="col">Still In Progress</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}" th:object="${order}">
+        <td th:text="*{productName}"></td>
+        <td th:text="*{category}"></td>
+        <td th:text="*{price}"></td>
+        <td th:text="*{quantity}"></td>
+        <td th:text="*{totalPrice}"></td>
+        <td th:text="*{createdAt}"></td>
+        <td th:text="*{isActivated}"></td>
+        <td>
+            <form th:action="@{'/orders/' + ${email} + '/' + ${order.orderId}}" method="post">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
