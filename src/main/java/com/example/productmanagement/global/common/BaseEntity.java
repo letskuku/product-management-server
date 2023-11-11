@@ -23,4 +23,8 @@ public class BaseEntity {
     private LocalDateTime updatedAt;
 
     private Boolean isActivated = true;
+
+    public void updateIsActivatedFalse() {
+        this.isActivated = false;
+    }
 }
